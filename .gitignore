@@ -1,0 +1,10 @@
+target
+work
+*.ipr
+*.iml
+*.iws
+.idea/*
+.*
+
+!target/global-pre-script-plugin.hpi
+!.gitignore
