@@ -46,7 +46,7 @@ public class GPSEnvVars {
             return new HashMap<String, String>();
         }
 
-        logger.println("Global Groovy script: evaluating content");
+        logger.println("Global Groovy script: evaluating script");
 
         Binding binding = new Binding();
         String jobName = envVars.get("JOB_NAME");
