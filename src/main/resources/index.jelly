@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    This plugins executes a groovy script at the begining of every build
+</div>
