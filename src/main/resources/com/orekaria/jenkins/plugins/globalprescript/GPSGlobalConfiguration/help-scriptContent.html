@@ -1,21 +1,30 @@
 <div>
-<p>Evaluates a Groovy script and injects the results into the environment of every build. This script is powered by the <a href="https://plugins.jenkins.io/script-security">Script Security Plugin</a>; both Approved Script and Groovy Sandbox modes are available. For the new scripts it is recommended to use the Sandbox mode.</p>
-<h3>Usage</h3>
-<p>The groovy script must return a <code>Map&lt;String,String&gt;</code> Java object. You can access parameters and other environment variables through variables in the Groovy script. In the scripts you can also use the following variables.</p>
-<dl>
-<dt>currentJob</dt>
-<dd>Current <a href="http://javadoc.jenkins-ci.org/hudson/model/Job.html">hudson.model.Job</a> instance.</dd>
-<dt>currentBuild</dt>
-<dd>Current <a href="http://javadoc.jenkins-ci.org/hudson/model/Run.html">hudson.model.Run</a> instance.</dd>
-<dt>currentListener</dt>
-<dd>Current <a href="http://javadoc.jenkins.io/hudson/model/TaskListener.html">hudson.model.TaskListener</a> instance, which can be used for logging purposes.</dd>
-<dt>out</dt>
-<dd>Another logging instance as <a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html">java.io.PrintStream</a>. It is recommended to use <code>currentListener</code> instead of this variable when possible.</dd>
-</dl>
-<p>All listed variables can be used in both script modes. In the Sandbox mode the access to particular fields and methods may require an additional approval.</p>
-<h3>Example 1</h3>
-<p>Injects a new environment variable to all builds, called NEW_PROPERTY</p>
-<pre><code>    // build a map
+    <p>Evaluates a Groovy script and injects the results into the environment of every build. This script is powered by
+        the <a href="https://plugins.jenkins.io/script-security">Script Security Plugin</a>; both Approved Script and
+        Groovy Sandbox modes are available. For the new scripts it is recommended to use the Sandbox mode.</p>
+    <h3>Usage</h3>
+    <p>The groovy script must return a <code>Map&lt;String,String&gt;</code> Java object. You can access parameters and
+        other environment variables through variables in the Groovy script. In the scripts you can also use the
+        following variables.</p>
+    <dl>
+        <dt>currentJob</dt>
+        <dd>Current <a href="http://javadoc.jenkins-ci.org/hudson/model/Job.html">hudson.model.Job</a> instance.</dd>
+        <dt>currentBuild</dt>
+        <dd>Current <a href="http://javadoc.jenkins-ci.org/hudson/model/Run.html">hudson.model.Run</a> instance.</dd>
+        <dt>currentListener</dt>
+        <dd>Current <a href="http://javadoc.jenkins.io/hudson/model/TaskListener.html">hudson.model.TaskListener</a>
+            instance, which can be used for logging purposes.
+        </dd>
+        <dt>out</dt>
+        <dd>Another logging instance as <a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html">java.io.PrintStream</a>.
+            It is recommended to use <code>currentListener</code> instead of this variable when possible.
+        </dd>
+    </dl>
+    <p>All listed variables can be used in both script modes. In the Sandbox mode the access to particular fields and
+        methods may require an additional approval.</p>
+    <h3>Example 1</h3>
+    <p>Injects a new environment variable to all builds, called NEW_PROPERTY</p>
+    <pre><code>    // build a map
     def map = [: ]
     // add the property
     map['NEW_PROPERTY'] = 'somevalue'
@@ -27,9 +36,10 @@
 
     return map
         </code></pre>
-<h3>Example 2</h3>
-<p>Explodes the contents of the <code>PROPERTIES_TO_INJECT</code> and inject its key=value. For this example to work, create a multiline string parameter in any job with some key=value entries</p>
-<pre><code>
+    <h3>Example 2</h3>
+    <p>Explodes the contents of the <code>PROPERTIES_TO_INJECT</code> and inject its key=value. For this example to
+        work, create a multiline string parameter in any job with some key=value entries</p>
+    <pre><code>
     if (!binding.hasVariable('PROPERTIES_TO_INJECT')) {
         out.println("Nothing to inject globally. You could add a multiline string parameter and inject pairs of key=value")
         return

@@ -14,7 +14,6 @@ import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Serializable;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -22,6 +21,7 @@ import java.util.Map;
  */
 @Extension
 public class GPSListener extends RunListener<Run> implements Serializable {
+    public static final String APP_NAME = "Global Pre Groovy script";
 
     @Override
     public Environment setUpEnvironment(@Nonnull AbstractBuild build, @Nonnull Launcher launcher,
@@ -42,7 +42,7 @@ public class GPSListener extends RunListener<Run> implements Serializable {
             SecureGroovyScript secureGlobalGroovyScriptContent = new SecureGroovyScript(globalGroovyScriptContent, false, null).configuring(ApprovalContext.create());
             final Map<String, String> groovyMapEnvVars = envVarsHelper.executeGroovyScript(logger, listener, secureGlobalGroovyScriptContent, envVars);
 
-            logger.println("Global Groovy script: injecting variables");
+            // logger.println(String.format("%s: injecting variables", APP_NAME));
             return new Environment() {
                 @Override
                 public void buildEnvVars(Map<String, String> env) {
@@ -65,7 +65,6 @@ public class GPSListener extends RunListener<Run> implements Serializable {
         }
 
         return job instanceof BuildableItemWithBuildWrappers;
-
     }
 
     @CheckForNull
