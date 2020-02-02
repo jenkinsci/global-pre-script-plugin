@@ -1,7 +1,6 @@
 package com.orekaria.jenkins.plugins.globalprescript;
 
 import hudson.Extension;
-import hudson.FilePath;
 import hudson.Launcher;
 import hudson.matrix.MatrixRun;
 import hudson.model.*;
@@ -9,7 +8,6 @@ import hudson.model.listeners.RunListener;
 import org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.SecureGroovyScript;
 import org.jenkinsci.plugins.scriptsecurity.scripts.ApprovalContext;
 
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -35,11 +33,11 @@ public class GPSListener extends RunListener<Run> implements Serializable {
 
         Map<String, String> envVars = build.getBuildVariables();
         GPSEnvVars envVarsHelper = new GPSEnvVars();
-        String globalGroovyScriptContent = GPSGlobalConfiguration.get().getScriptContent();
+        SecureGroovyScript secureGroovyScript = GPSGlobalConfiguration.get().getSecureGroovyScript();
 
         try {
-            //Evaluate Groovy script
-            SecureGroovyScript secureGlobalGroovyScriptContent = new SecureGroovyScript(globalGroovyScriptContent, false, null).configuring(ApprovalContext.create());
+            // execute Groovy script
+            SecureGroovyScript secureGlobalGroovyScriptContent = secureGroovyScript.configuring(ApprovalContext.create());
             final Map<String, String> groovyMapEnvVars = envVarsHelper.executeGroovyScript(logger, listener, secureGlobalGroovyScriptContent, envVars);
 
             // logger.println(String.format("%s: injecting variables", APP_NAME));

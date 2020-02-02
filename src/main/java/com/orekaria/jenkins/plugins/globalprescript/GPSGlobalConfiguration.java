@@ -2,7 +2,7 @@ package com.orekaria.jenkins.plugins.globalprescript;
 
 import hudson.Extension;
 import hudson.util.FormValidation;
-import org.apache.commons.lang.StringUtils;
+import org.jenkinsci.plugins.scriptsecurity.sandbox.groovy.SecureGroovyScript;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
 
@@ -25,23 +25,23 @@ public class GPSGlobalConfiguration extends jenkins.model.GlobalConfiguration {
         load();
     }
 
-    private String scriptContent;
+    private SecureGroovyScript secureGroovyScript;
 
     /**
      * @return the currently configured scriptContent, if any
      */
-    public String getScriptContent() {
-        return scriptContent;
+    public SecureGroovyScript getSecureGroovyScript() {
+        return secureGroovyScript;
     }
 
     /**
-     * Together with {@link #getScriptContent}, binds to entry in {@code config.jelly}.
+     * Together with {@link #getSecureGroovyScript}, binds to entry in {@code config.jelly}.
      *
-     * @param scriptContent the new value of this field
+     * @param secureGroovyScript the new value of this field
      */
     @DataBoundSetter
-    public void setScriptContent(String scriptContent) {
-        this.scriptContent = scriptContent;
+    public void setSecureGroovyScript(SecureGroovyScript secureGroovyScript) {
+        this.secureGroovyScript = secureGroovyScript;
         save();
     }
 
