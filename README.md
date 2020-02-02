@@ -29,7 +29,7 @@ Features:
 
 ## Configuration
 
-Add the script in the *Global Pre Groovy script* box available at Jenkins -> Manage Jenkins -> Configure System
+Add a groovy script in the *Global Pre Groovy script* box available at Jenkins -> Manage Jenkins -> Configure System
 If the script fails to be evaluated, you will get error message in the Console Output of the job
 
 ### Manage Jenkins -> Configure System
@@ -150,4 +150,5 @@ See [GitHub Releases](https://github.com/Orekaria/global-pre-script-plugin/relea
 
 
 (powered by [Script Security Plugin](https://plugins.jenkins.io/script-security))
+
 (inspired by [EnvInject Plugin](https://plugins.jenkins.io/envinject))
