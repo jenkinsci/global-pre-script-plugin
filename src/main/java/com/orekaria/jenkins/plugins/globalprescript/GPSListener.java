@@ -66,23 +66,4 @@ public class GPSListener extends RunListener<Run> implements Serializable {
 
         return job instanceof BuildableItemWithBuildWrappers;
     }
-
-    @CheckForNull
-    private Node getNode() {
-        Computer computer = Computer.currentComputer();
-        if (computer == null) {
-            return null;
-        }
-        return computer.getNode();
-    }
-
-    @CheckForNull
-    private FilePath getNodeRootPath() {
-        Node node = getNode();
-        if (node != null) {
-            return node.getRootPath();
-        }
-        return null;
-    }
-
 }
