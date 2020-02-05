@@ -12,6 +12,7 @@ import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -31,22 +32,24 @@ public class GPSListener extends RunListener<Run> implements Serializable {
             };
         }
 
-        Map<String, String> envVars = build.getBuildVariables();
-        GPSEnvVars envVarsHelper = new GPSEnvVars();
-        SecureGroovyScript secureGroovyScript = GPSGlobalConfiguration.get().getSecureGroovyScript();
+        Map<String, String> envVars = new LinkedHashMap<String, String>();
+        envVars.putAll(build.getBuildVariables());
+        envVars.putAll(build.getCharacteristicEnvVars());
 
         try {
             // execute Groovy script
+            SecureGroovyScript secureGroovyScript = GPSGlobalConfiguration.get().getSecureGroovyScript();
             SecureGroovyScript secureGlobalGroovyScriptContent = secureGroovyScript.configuring(ApprovalContext.create());
+            GPSEnvVars envVarsHelper = new GPSEnvVars();
             final Map<String, String> groovyMapEnvVars = envVarsHelper.executeGroovyScript(logger, listener, secureGlobalGroovyScriptContent, envVars);
 
-            // logger.println(String.format("%s: injecting variables", APP_NAME));
             return new Environment() {
                 @Override
                 public void buildEnvVars(Map<String, String> env) {
                     env.putAll(groovyMapEnvVars);
                 }
             };
+
         } catch (Exception e) {
             logger.println(e.getMessage());
             return new Environment() {
