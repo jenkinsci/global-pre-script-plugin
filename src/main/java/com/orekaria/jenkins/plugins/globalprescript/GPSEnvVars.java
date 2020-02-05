@@ -49,7 +49,7 @@ public class GPSEnvVars {
             return new HashMap<String, String>();
         }
 
-        logger.println(String.format("%s: start of script execution", GPSListener.APP_NAME));
+        logger.println(String.format("%s: start", GPSListener.APP_NAME));
 
         Binding binding = new Binding();
         String jobName = envVars.get("JOB_NAME");
@@ -98,7 +98,7 @@ public class GPSEnvVars {
             result.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()));
         }
 
-        logger.println(String.format("%s: end of script execution", GPSListener.APP_NAME));
+        logger.println(String.format("%s: end", GPSListener.APP_NAME));
 
         return result;
     }
