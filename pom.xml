@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
     <groupId>io.jenkins.plugins</groupId>
-    <artifactId>https://github.com/ci/global-pre-script</artifactId>
+    <artifactId>global-pre-script</artifactId>
     <version>1.4-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <properties>
