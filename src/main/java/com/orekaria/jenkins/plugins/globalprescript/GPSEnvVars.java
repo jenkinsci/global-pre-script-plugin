@@ -78,7 +78,7 @@ public class GPSEnvVars {
             StackTraceElement[] elements = e.getStackTrace();
             for (int i = 1; i < elements.length; i++) {
                 StackTraceElement s = elements[i];
-                if (s.getClassName() == "Script1" && s.getMethodName() == "run") {
+                if (s.getClassName().equals("Script1") && s.getMethodName().equals("run")) {
                     message = String.format("%s in line %s", message, s.getLineNumber());
                     break;
                 }
