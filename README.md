@@ -19,14 +19,6 @@ Features:
 * Logging the variables used in the builds
 * Requiring to execute a script that affects all jobs
 
-## Instalation
-
-1. Clone this repository
-2. Upload target/global-pre-script-plugin.hpi to Jenkins -> Manage Jenkins -> Plugin Manager -> Advanced -> Upload plugin
-
-![](docs/installPlugin.png "Jenkins -> Manage Jenkins -> Plugin Manager -> Advanced -> Upload plugin")
-
-
 ## Configuration
 
 Add a groovy script in the *Global Pre Groovy script* box available at Jenkins -> Manage Jenkins -> Configure System
@@ -146,7 +138,7 @@ There is no need for this plugin when using pipelines and it will not be execute
 
 ## Changelog
 
-See [GitHub Releases](https://github.com/Orekaria/global-pre-script-plugin/releases) for recent releases.
+See [GitHub Releases](https://github.com/jenkinsci/global-pre-script-plugin/releases) for recent releases.
 
 
 (powered by [Script Security Plugin](https://plugins.jenkins.io/script-security))
